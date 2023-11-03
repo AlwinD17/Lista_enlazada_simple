@@ -121,5 +121,54 @@ public class Lista {
         }
         return true;
     }
+
+    public String buscarPorCodigo(int codigo){
+        if(existe(codigo)){
+            Nodo ptr = inicio;
+            while (ptr != null && ptr.getCodigo() != codigo){
+                ptr = ptr.getSiguiente();
+            }
+            return ptr.getNombre();
+        }
+        return "No existe tal nodo";
+    }
+
+    public int buscarPorNombre(String nombre){
+        Nodo ptr = inicio;
+        while (ptr != null && ptr.getNombre() != nombre){
+            ptr = ptr.getSiguiente();}
+        return ptr.getCodigo();
+    }
+
+    public void modificar(int codigo, String nombre){
+        if(existe(codigo)){
+            Nodo ptr = inicio;
+            while (ptr != null && ptr.getCodigo() != codigo){
+                ptr = ptr.getSiguiente();
+            }
+            ptr.setNombre(nombre);
+        }
+    }
+
+    public boolean eliminarPorPosicion(int posicion){
+        if(posicion < longitud()){
+            Nodo ptr = inicio;
+            Nodo qtr = ptr;
+            int i = 0;
+            while(i <= posicion){
+                qtr = ptr;
+                ptr = ptr.getSiguiente();
+                i++;
+            }
+            if(ptr == inicio){
+                inicio = inicio.getSiguiente();
+            }else
+                qtr.setSiguiente(ptr.getSiguiente());
+            ptr = null;
+            return true;
+        }
+        return false;
+    }
+
 }   
 
